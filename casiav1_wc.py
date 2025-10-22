@@ -7,21 +7,22 @@ Original file is located at
     https://colab.research.google.com/drive/1dwUR918k5q3SHab8pRidKCl3GoWWn-Ns
 """
 
-!pip install onnx onnxruntime pydantic==1.10.16 huggingface-hub pyyaml
-!pip install --no-deps open-iris
+# !pip install onnx onnxruntime pydantic==1.10.16 huggingface-hub pyyaml
+# !pip install --no-deps open-iris
 
 import iris
+import numpy as np
 
 print(iris.__version__)
 
 # Upload CASIA.zip
 # Unzip CASIA V1
-!unzip -q /content/CASIA1.zip
+# !unzip -q /content/CASIA1.zip
 
 import cv2
 import matplotlib.pyplot as plt
 
-img_pixels = cv2.imread("/content/CASIA1/1/001_1_1.jpg", cv2.IMREAD_GRAYSCALE)
+img_pixels = cv2.imread("home/nishkal/datasets/iris_datasets/CASIA/V3/CASIA-IrisV3/CASIA-Iris-Interval/001/L/S1001L01.jpg", cv2.IMREAD_GRAYSCALE)
 plt.imshow(img_pixels, cmap='gray')
 
 iris_pipeline = iris.IRISPipeline()
@@ -231,7 +232,7 @@ def pipeline(dataset_path = "/content/CASIA1", save_visuals = True, save_embeddi
 
 pipeline()
 
-!zip -r /content/outputs.zip /content/outputs
+# !zip -r /content/outputs.zip /content/outputs
 
 print("Initialising Iris Pipeline")
 iris_pipeline = iris.IRISPipeline(env=iris.IRISPipeline.DEBUGGING_ENVIRONMENT)
@@ -248,7 +249,7 @@ print(output.keys())
 print(output['iris_template'].iris_codes[0].shape)
 
 #print(output['metadata'])
-import numpy as np
+
 #print(output['iris_template'])
 iris_code = output['iris_template'].iris_codes[0]
 #print(iris_code)
